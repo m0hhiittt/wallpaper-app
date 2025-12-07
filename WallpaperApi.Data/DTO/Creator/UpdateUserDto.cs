@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace WallpaperApi.DTO.Creator
 {
@@ -12,9 +13,7 @@ namespace WallpaperApi.DTO.Creator
         [MinLength(2)]
         [MaxLength(10)]
         public string? LastName { get; set; }
-        [Required]
-        [MinLength(2)]
-        [MaxLength(55)]
-        public string? Email { get; set; }
+        [Required(ErrorMessage = "Please upload an image file.")]
+        public IFormFile File { get; set; }
     }
 }

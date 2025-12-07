@@ -1,0 +1,15 @@
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\WallpaperApi.Data.csproj.AssemblyReference.cache
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\WallpaperApi.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\WallpaperApi.Data.AssemblyInfoInputs.cache
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\WallpaperApi.Data.AssemblyInfo.cs
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\WallpaperApi.Data.csproj.CoreCompileInputs.cache
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\WallpaperApi.Data.sourcelink.json
+C:\repos\the-wallpaper-app\WallpaperApi.Data\bin\Debug\net8.0\WallpaperApi.Data.deps.json
+C:\repos\the-wallpaper-app\WallpaperApi.Data\bin\Debug\net8.0\WallpaperApi.Data.runtimeconfig.json
+C:\repos\the-wallpaper-app\WallpaperApi.Data\bin\Debug\net8.0\WallpaperApi.Data.dll
+C:\repos\the-wallpaper-app\WallpaperApi.Data\bin\Debug\net8.0\WallpaperApi.Data.pdb
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\WallpaperApi.Data.dll
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\refint\WallpaperApi.Data.dll
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\WallpaperApi.Data.pdb
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\WallpaperApi.Data.genruntimeconfig.cache
+C:\repos\the-wallpaper-app\WallpaperApi.Data\obj\Debug\net8.0\ref\WallpaperApi.Data.dll

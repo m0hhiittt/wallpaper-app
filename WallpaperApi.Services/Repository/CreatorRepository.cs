@@ -38,21 +38,13 @@ namespace WallpaperApi.Repository
             return userExist;
         }
 
-        public async Task<Creator?> GetByEmailAndPasswordAsync(string email, string password)
-        {
-            using var sha256 = System.Security.Cryptography.SHA256.Create();
-            var hashedPassword = Convert.ToBase64String(
-                sha256.ComputeHash(Encoding.UTF8.GetBytes(password))
-            );
-
-            // Compare with stored hashed password
-            return await _context.Creators
-                .FirstOrDefaultAsync(c => c.Email == email && Convert.ToBase64String(c.HashedPassword) == hashedPassword);
-        }
-
         public async Task<IEnumerable<Creator>> GetUserAsync()
         {
-            return await _context.Creators.Include(x=>x.ReviewProcesses).Include(y=>y.Wallpapers).ToListAsync();
+            return await _context.Creators.Include(x=>x.ReviewProcesses)
+                .ThenInclude(r=>r.Resolutions)
+                .Include(y=>y.Wallpapers)
+                .ThenInclude(r=>r.Resolutions)
+                .ToListAsync();
         }
 
         public async Task<Creator> GetUserByIdAsync(int id)
@@ -78,7 +70,6 @@ namespace WallpaperApi.Repository
 
             UserExist.FirstName = creator.FirstName;
             UserExist.LastName = creator.LastName;
-            UserExist.Email = creator.Email;
 
             await _context.SaveChangesAsync();
 

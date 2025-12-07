@@ -1,5 +1,6 @@
 ﻿using Review.Services.Mapper;
 using System.Text;
+using WallpaperApi.Data.DTO.Creator;
 using WallpaperApi.DTO.Creator;
 using WallpaperApi_Model.Model;
 
@@ -16,6 +17,7 @@ namespace WallpaperApi.Mapper
                 LastName = model.LastName,
                 Password = Convert.ToBase64String(model.HashedPassword),
                 Email = model.Email,
+                UserImage = model.UserImage,
                 CreatedOn = model.CreatedOn,
                 ReviewDtos = model.ReviewProcesses.Select(ReviewProcessMapper.ToReviewDto).ToList(),
                 Wallpapers = model.Wallpapers.Select(WallpaperMapper.ToWallpaperDto).ToList(),
@@ -40,7 +42,6 @@ namespace WallpaperApi.Mapper
             {
                 FirstName = creatorModel.FirstName,
                 LastName = creatorModel.LastName,
-                Email = creatorModel.Email,
             };
         }
 

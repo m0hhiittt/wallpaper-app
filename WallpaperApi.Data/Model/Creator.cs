@@ -20,6 +20,7 @@ namespace WallpaperApi_Model.Model
         [Required(ErrorMessage = "Please Enter Valid Email")]
         [EmailAddress]
         public string Email { get; set; } = null!;
+        public string? UserImage { get; set; }
         public byte[] HashedPassword { get; set; }
         public DateTime CreatedOn { get; set; }
         public List<ReviewProcess>? ReviewProcesses{ get; set; } = new List<ReviewProcess>();

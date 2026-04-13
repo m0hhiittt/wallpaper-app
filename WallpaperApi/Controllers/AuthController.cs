@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Mvc;
+using WallpaperApi.Data.DTO.AuthDto;
 using WallpaperApi.DTO.Creator;
 using WallpaperApi.Services.Interface.Service;
 using WallpaperApi.Services.Services;
+using WallpaperApi_Model.Model;
 
 namespace WallpaperApi.Controllers
 {
@@ -9,26 +12,25 @@ namespace WallpaperApi.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly ICreatorService _creatorService;
+        private readonly IAuthenticatedService _service;
         private readonly IJwtService _jwtService;
 
-        public AuthController(ICreatorService creatorService, IJwtService jwtService)
+        public AuthController(IAuthenticatedService service, IJwtService jwtService)
         {
-            _creatorService = creatorService;
+            _service = service;
             _jwtService = jwtService;
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] AuthDto request)
         {
-            var creator = await _creatorService.GetByEmailAndPasswordAsync(request.Email, request.Password);
+            var authUser = await _service.IsUserAuthenticated(request.Email, request.Password);
 
-            if (creator == null)
+            if (authUser == null)
                 return Unauthorized("Invalid email or password");
 
-            var token = _jwtService.GenerateJwtToken(creator);
+            var token = _jwtService.GenerateJwtToken(authUser);
 
-            // ✅ Optionally store in cookie
             Response.Cookies.Append("AuthToken", token, new CookieOptions
             {
                 HttpOnly = true,
@@ -40,10 +42,8 @@ namespace WallpaperApi.Controllers
             return Ok(new
             {
                 Token = token,
-                User = creator
+                User = authUser,
             });
         }
-    }
-
-    public record LoginRequest(string Email, string Password);
+    }   
 }

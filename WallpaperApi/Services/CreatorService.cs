@@ -1,18 +1,22 @@
-﻿using WallpaperApi.DTO.Creator;
+﻿using WallpaperApi.Data.DTO.Creator;
+using WallpaperApi.DTO.Creator;
 using WallpaperApi.Mapper;
 using WallpaperApi.Services.Interface;
 using WallpaperApi.Services.Interface.Repository;
 using WallpaperApi.Services.Interface.Service;
+using WallpaperApi_Model.Model;
 
 namespace WallpaperApi.Services
 {
     public class CreatorService : ICreatorService
     {
         private readonly ICreatorRepository _repo;
+        private readonly IWebHostEnvironment _env;
 
-        public CreatorService(ICreatorRepository repo)
+        public CreatorService(ICreatorRepository repo, IWebHostEnvironment env)
         {
             _repo = repo;
+            _env = env;
         }
 
         public async Task<CreatorDto> CreateAsync(CreateUserDto dto)
@@ -43,20 +47,27 @@ namespace WallpaperApi.Services
             return user == null ? null : CreatorMapper.ToCreatorDto(user);
         }
 
-        public async Task<bool> UpdateAsync(int id, UpdateUserDto dto)
+        public async Task<bool> UpdateAsync(UpdateUserDto dto, int id)
         {
             var user = await _repo.GetUserByIdAsync(id);
-            if (user == null) return false;
+            if (user == null)
+                return false;
+
+            var roothPath = _env.ContentRootPath;
+            var path = Path.Combine(roothPath, "uploads");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await dto.File.CopyToAsync(stream);
+            }
 
             CreatorMapper.ToCreatorUpdateRequest(dto);
             await _repo.UpdateUserAsync(dto, id);
             return true;
-        }
-
-        public async Task<CreatorDto?> GetByEmailAndPasswordAsync(string email, string password)
-        {
-            var creator = await _repo.GetByEmailAndPasswordAsync(email, password);
-            return creator?.ToCreatorDto();
         }
     }
 }

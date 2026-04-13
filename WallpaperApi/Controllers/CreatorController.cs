@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WallpaperApi.DTO.Creator;
 using WallpaperApi.Mapper;
 using WallpaperApi.Services.Interface.Repository;
@@ -8,6 +9,7 @@ namespace WallpaperApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class CreatorController : Controller
     {
         private readonly ICreatorService _service;
@@ -39,18 +41,18 @@ namespace WallpaperApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateWallpaper([FromBody]UpdateUserDto userDto ,int id)
+        public async Task<IActionResult> UpdateUser([FromForm]UpdateUserDto userDto,int id)
         {
             var exist = await _service.GetByIdAsync(id);
             if (exist == null)
                 return NotFound();
 
-            var update = await _service.UpdateAsync(id, userDto);
+            var update = await _service.UpdateAsync(userDto, id);
             return Ok(update);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteWallpaper(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
             var userExist = await _service.GetByIdAsync(id);
 

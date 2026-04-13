@@ -34,6 +34,8 @@ builder.Services.AddScoped<IWallpaperService, WallpaperService>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IResolutionRepository, ResolutionRepository>();
+builder.Services.AddScoped<IAuthenticatedService, AuthenticationService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
 
 // ✅ Add CORS here (before Build)
 builder.Services.AddCors(options =>

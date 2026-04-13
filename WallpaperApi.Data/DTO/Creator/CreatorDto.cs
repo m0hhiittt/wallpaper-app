@@ -18,7 +18,9 @@ namespace WallpaperApi.DTO.Creator
         [Required]
         [MinLength(2)]
         [MaxLength(55)]
+        [EmailAddress]
         public string? Email { get; set; }
+        public string? UserImage { get; set; }
         public string Password { get; set; }
         public DateTime CreatedOn { get; set; }
         public List<ReviewDto>? ReviewDtos{ get; set; } = new List<ReviewDto>();

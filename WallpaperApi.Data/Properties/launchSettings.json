@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WallpaperApi.Data": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\ArtyaSoft\\source\\repos\\wallpaper-app\\WallpaperApi"
+    }
+  }
+}
